@@ -6,6 +6,7 @@ import { themeConfig } from "@themeConfig";
 // Components
 import Footer from "@/layouts/components/Footer.vue";
 import NavBarNotifications from "@/layouts/components/NavBarNotifications.vue";
+import NavBarLogout from "@/layouts/components/NavBarLogout.vue";
 import NavbarShortcuts from "@/layouts/components/NavbarShortcuts.vue";
 import NavbarThemeSwitcher from "@/layouts/components/NavbarThemeSwitcher.vue";
 import UserProfile from "@/layouts/components/UserProfile.vue";
