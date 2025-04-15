@@ -59,7 +59,6 @@ const onClear = () => {
                 prepend-inner-icon="tabler-calendar-event"
                 moon
                 clearable
-                disabled
                 @keydown.esc="onClear"
               />
             </div>

@@ -83,7 +83,6 @@ const onClear = () => {
                 moon
                 clearable
                 range
-                disabled
                 @keydown.esc="onClear"
               />
             </div>

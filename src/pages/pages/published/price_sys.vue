@@ -341,7 +341,7 @@ const onClear = () => {
             :config="{ dateFormat: 'Y.m.d', allowInput: true }"
             prepend-inner-icon="tabler-calendar-event"
             clearable
-            readonly
+            disabled
             @keydown.esc="onClear"
           />
         </VCol>
@@ -352,7 +352,7 @@ const onClear = () => {
             :config="{ dateFormat: 'Y.m.d', allowInput: true }"
             prepend-inner-icon="tabler-calendar-event"
             clearable
-            readonly
+            disabled
             @keydown.esc="onClear"
           />
         </VCol>

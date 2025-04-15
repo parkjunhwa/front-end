@@ -62,7 +62,6 @@ const isDialogVisible = ref(false);
               :config="{ mode: 'range' }"
               prepend-inner-icon="tabler-calendar-event"
               clearable
-              readonly
               @keydown.esc="onClear"
               v-show="expanded"
               class="w-100"

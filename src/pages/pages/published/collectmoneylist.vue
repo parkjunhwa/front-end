@@ -1,6 +1,11 @@
 <script setup>
 import BottomTotalArea from "@/layouts/components/BottomTotalArea.vue";
 import TopSearchArea from "@/layouts/Components/TopSearchArea.vue";
+const inputValue = ref("");
+
+const onClear = () => {
+  inputValue.value = "";
+};
 </script>
 
 <template>
@@ -33,22 +38,24 @@ import TopSearchArea from "@/layouts/Components/TopSearchArea.vue";
   <VRow>
     <VCol cols="12">
       <TopSearchArea v-model:expanded="expanded" :openbutton="true">
-        <VCol cols="12" lg="8" md="8" sm="12" xs="12">
-          <div class="top-search-collect01-start">
-            <VChip>
-              <div class="gap-2 flex-wrap justify-start w-100 top-chip-item">
-                <v-icon class="tabler-calendar-event"></v-icon>
-                <span class="item-title">조회기간</span>
-                <span class="item-text">2025.02.02 ~ 2025.02.02</span>
-              </div>
-            </VChip>
-            <AppTextField
-              prepend-inner-icon="tabler-asterisk-simple"
-              append-inner-icon="tabler-search"
-              placeholder="거래처코드, 거래처명을 검색하세요."
-              v-show="expanded"
-            />
-          </div>
+        <VCol cols="12" lg="4" md="4" sm="12" xs="12">
+          <AppDateTimePicker
+            v-model="dateRange"
+            placeholder="날자 선택"
+            prefix="조회기간"
+            :config="{ mode: 'range' }"
+            prepend-inner-icon="tabler-calendar-event"
+            clearable
+            @keydown.esc="onClear"
+          />
+        </VCol>
+        <VCol cols="12" lg="4" md="4" sm="12" xs="12">
+          <AppTextField
+            prepend-inner-icon="tabler-asterisk-simple"
+            append-inner-icon="tabler-search"
+            placeholder="거래처코드, 거래처명을 검색하세요."
+            v-show="expanded"
+          />
         </VCol>
         <VCol cols="12" lg="4" md="4" sm="12" xs="12" v-show="expanded">
           <div class="d-flex gap-2 flex-wrap justify-end w-100">
@@ -398,6 +405,7 @@ export default {
       expanded: true,
       values: "",
       nameRules: [(v) => !!v || "필수 항목입니다"],
+      dateRange: ["2024-10-11", "2024-11-10"],
     };
   },
 };

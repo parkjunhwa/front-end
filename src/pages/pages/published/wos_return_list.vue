@@ -57,7 +57,6 @@ const onClear = () => {
                 :config="{ mode: 'range' }"
                 prepend-inner-icon="tabler-calendar-event"
                 clearable
-                readonly
                 @keydown.esc="onClear"
                 style="min-width: 320px"
               />
