@@ -68,7 +68,6 @@ const onClear = () => {
       </TopSearchArea>
     </VCol>
   </VRow>
-  <VRow> </VRow>
   <VRow>
     <VCol cols="12">
       <STitleArea>
