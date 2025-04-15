@@ -75,6 +75,10 @@ const onClear2 = () => {
 const onClear3 = () => {
   credentials.value.password = "";
 };
+
+// 팝업
+const isDialogVisible = ref(false);
+const currentTab = ref("window1");
 </script>
 
 <template>
@@ -96,6 +100,9 @@ const onClear3 = () => {
                 ‘좋은 치료제, 넘치는 건강’ 명인제약 입니다.
               </p>
             </VCardText>
+            <div class="icon">
+              <img src="@images/logos/logo_w.png" alt="logo" />
+            </div>
           </VCard>
         </VCol>
         <VCol cols="12" sm="12" lg="6">
@@ -122,16 +129,6 @@ const onClear3 = () => {
                 </p>
               </VCol>
               <h4 class="text-h4 mb-8">로그인</h4>
-              <!-- <VAlert color="primary" variant="tonal" class="mb-4">
-                <p class="text-sm mb-2">
-                  Admin Email: <strong>admin@demo.com</strong> / Pass:
-                  <strong>admin</strong>
-                </p>
-                <p class="text-sm mb-0">
-                  Client Email: <strong>client@demo.com</strong> / Pass:
-                  <strong>client</strong>
-                </p>
-              </VAlert> -->
               <VForm ref="refVForm" @submit.prevent="onSubmit">
                 <VRow>
                   <!-- companycode -->
@@ -184,15 +181,35 @@ const onClear3 = () => {
                       class="d-flex align-center justify-space-between flex-wrap"
                     >
                       <VCheckbox v-model="rememberMe" label="아이디 저장" />
+                      <VDialog v-model="isDialogVisible" width="500">
+                        <!-- Activator -->
+                        <template #activator="{ props }">
+                          <VBtn
+                            variant="text"
+                            v-bind="props"
+                            class="text-primary ms-2 mb-1"
+                            >비밀번호 재설정</VBtn
+                          >
+                        </template>
 
-                      <RouterLink
-                        class="text-primary ms-2 mb-1"
-                        :to="{
-                          name: 'pages-authentication-forgot-password-v1',
-                        }"
-                      >
-                        비밀번호 재설정
-                      </RouterLink>
+                        <!-- Dialog close btn -->
+                        <DialogCloseBtn
+                          @click="isDialogVisible = !isDialogVisible"
+                        />
+                        <!-- Dialog Content -->
+                        <VCard title="비밀번호 재설정">
+                          <VCardText>
+                            <!-- <AppTextField placeholder="회사코드" />  도매상의 경우 -->
+                            <AppTextField placeholder="아이디" />
+                            <AppTextField placeholder="이름" />
+                          </VCardText>
+                          <VCardText class="d-flex justify-end gap-2 flex-wrap">
+                            <VBtn @click="isDialogVisible = false">
+                              비밀번호 변경</VBtn
+                            >
+                          </VCardText>
+                        </VCard>
+                      </VDialog>
                     </div>
                   </VCol>
                   <VCol cols="12">
@@ -203,7 +220,6 @@ const onClear3 = () => {
                   <VCol cols="12" class="text-body-2 text-center">
                     <RouterLink
                       class="text-primary ms-1 d-inline-block text-body-2"
-                      :to="{ name: 'pages-authentication-register-v1' }"
                     >
                       관리자에게 계정요청
                     </RouterLink>
@@ -289,6 +305,7 @@ const onClear3 = () => {
   .match-height {
     > .v-col-12 {
       padding: 0 !important;
+      height: 650px;
     }
   }
 }
@@ -311,5 +328,14 @@ const onClear3 = () => {
 }
 .color-blue {
   color: #113264;
+}
+.icon {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  img {
+    height: 24px;
+  }
 }
 </style>

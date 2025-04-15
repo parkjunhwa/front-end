@@ -912,7 +912,12 @@ export default {
     flex-direction: column !important;
     align-items: normal;
   }
-
+  .v-tabs-pill {
+    padding: 0 !important;
+    display: block;
+    width: 100%;
+    margin: 0 !important;
+  }
   .top-search-order-end {
     display: flex;
     flex-wrap: wrap;

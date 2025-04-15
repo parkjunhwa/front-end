@@ -98,7 +98,7 @@ const onClear = () => {
             readonly
           />
         </VCol>
-        <VCol cols="12" lg="3" md="3" sm="12" xs="12">
+        <VCol cols="12" lg="2" md="2" sm="12" xs="12">
           <AppTextField
             label="전화번호"
             value="010-0000-0000"
@@ -116,18 +116,17 @@ const onClear = () => {
         </VCol>
 
         <VCol cols="12" lg="2" md="2" sm="12" xs="12">
-          <AppSelect
-            label="유통구분"
-            :items="items"
-            v-model="selectedItem"
+          <AppTextField
+            label="매출처가격그룹"
+            value="직거래약국,의원"
             class="required"
             readonly
           />
         </VCol>
-        <VCol cols="12" lg="12" md="12" sm="12" xs="12">
+        <VCol cols="12" lg="1" md="1" sm="12" xs="12">
           <AppTextField
-            label="주소"
-            value="거래처의 주소 출력"
+            label="유통구분분"
+            value="병,의원원"
             class="required"
             readonly
           />
