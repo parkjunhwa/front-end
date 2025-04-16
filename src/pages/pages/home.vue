@@ -1,8 +1,6 @@
 <script setup>
 import STitleArea from "@/layouts/components/STitleArea.vue";
-import TitleArea from "@/layouts/components/TitleArea.vue";
 import TopSearchArea from "@/layouts/Components/TopSearchArea.vue";
-import chart00 from "@/views/charts/apex-chart/chart00.vue";
 import Alert001 from "@/pages/pages/published/alert/alert001.vue";
 import Alert002 from "@/pages/pages/published/alert/alert002.vue";
 import Alert003 from "@/pages/pages/published/alert/alert003.vue";
@@ -26,6 +24,7 @@ import Popup012 from "@/pages/pages/published/popup/popup012.vue";
 import Popup013 from "@/pages/pages/published/popup/popup013.vue";
 import Popup014 from "@/pages/pages/published/popup/popup014.vue";
 import Popup015 from "@/pages/pages/published/popup/popup015.vue";
+import chart00 from "@/views/charts/apex-chart/chart00.vue";
 </script>
 
 <template>
@@ -210,7 +209,7 @@ import Popup015 from "@/pages/pages/published/popup/popup015.vue";
           />
         </VCol>
 
-        <VCol cols="12" lg="3" md="4" sm="6" xs="12">
+        <VCol cols="12" lg="3" md="4" sm="6" xs="12" v-show="expanded">
           <AppAutocomplete
             v-model="values"
             :items="items"

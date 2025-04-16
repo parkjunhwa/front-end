@@ -78,7 +78,25 @@ const onClear3 = () => {
 
 // 팝업
 const isDialogVisible = ref(false);
-const currentTab = ref("window1");
+const isDialogTwoShow = ref(false);
+
+import { ref } from "vue";
+
+const password = ref("");
+const confirmPassword = ref("");
+const show = ref(false);
+
+// 상황에 맞게 개발수정 필요
+const passwordRules = [
+  (v) => !!v || "비밀번호를 입력해주세요.",
+  (v) => v.length >= 8 || "8글자 이상 입력해주세요.",
+  (v) => /[0-9]/.test(v) || "숫자를 포함해야 합니다.",
+  (v) => /[a-zA-Z]/.test(v) || "문자를 포함해야 합니다.",
+  (v) => /[^a-zA-Z0-9]/.test(v) || "특수문자를 포함해야 합니다.",
+];
+
+const matchPasswordRule = (v) =>
+  v === password.value || "비밀번호가 일치하지 않습니다.";
 </script>
 
 <template>
@@ -181,32 +199,66 @@ const currentTab = ref("window1");
                       class="d-flex align-center justify-space-between flex-wrap"
                     >
                       <VCheckbox v-model="rememberMe" label="아이디 저장" />
-                      <VDialog v-model="isDialogVisible" width="500">
-                        <!-- Activator -->
-                        <template #activator="{ props }">
-                          <VBtn
-                            variant="text"
-                            v-bind="props"
-                            class="text-primary ms-2 mb-1"
-                            >비밀번호 재설정</VBtn
-                          >
-                        </template>
 
+                      <div
+                        @click="isDialogVisible = true"
+                        variant="text"
+                        class="text-primary ms-2 mb-1"
+                      >
+                        비밀번호 재설정
+                      </div>
+
+                      <!-- Dialog -->
+                      <VDialog v-model="isDialogVisible" class="v-dialog-sm">
                         <!-- Dialog close btn -->
                         <DialogCloseBtn
                           @click="isDialogVisible = !isDialogVisible"
                         />
-                        <!-- Dialog Content -->
                         <VCard title="비밀번호 재설정">
                           <VCardText>
                             <!-- <AppTextField placeholder="회사코드" />  도매상의 경우 -->
                             <AppTextField placeholder="아이디" />
                             <AppTextField placeholder="이름" />
                           </VCardText>
-                          <VCardText class="d-flex justify-end gap-2 flex-wrap">
-                            <VBtn @click="isDialogVisible = false">
+                          <VCardText class="d-flex flex-wrap">
+                            <VBtn @click="isDialogTwoShow = !isDialogTwoShow">
                               비밀번호 변경</VBtn
                             >
+                          </VCardText>
+                        </VCard>
+                      </VDialog>
+
+                      <!-- Dialog 2 -->
+                      <VDialog v-model="isDialogTwoShow" class="v-dialog-sm">
+                        <!-- Dialog close btn -->
+                        <DialogCloseBtn @click="isDialogTwoShow = false" />
+
+                        <VCard title="비밀번호 재설정">
+                          <VCardText>
+                            <AppTextField
+                              placeholder="신규 비밀번호를 입력해주세요."
+                              :type="show ? 'text' : 'password'"
+                              :rules="passwordRules"
+                            />
+                            <AppTextField
+                              placeholder="동일한 비밀번호를 입력해 주세요."
+                              :type="show ? 'text' : 'password'"
+                              :rules="[matchPasswordRule]"
+                            />
+                            <ul class="ml-4 text-secondary">
+                              <li>
+                                비밀번호는 숫자, 문자, 특수기호를 포함하여 8글자
+                                이상 구성하여야 합니다.
+                              </li>
+                              <li>
+                                최근 사용한 3개의 비밀번호는 사용이 불가합니다.
+                              </li>
+                            </ul>
+                          </VCardText>
+                          <VCardText class="d-flex flex-wrap">
+                            <VBtn @click="isDialogTwoShow = false">
+                              비밀번호 변경 완료
+                            </VBtn>
                           </VCardText>
                         </VCard>
                       </VDialog>
@@ -220,6 +272,7 @@ const currentTab = ref("window1");
                   <VCol cols="12" class="text-body-2 text-center">
                     <RouterLink
                       class="text-primary ms-1 d-inline-block text-body-2"
+                      to="/email_password_confirm.html"
                     >
                       관리자에게 계정요청
                     </RouterLink>
@@ -265,10 +318,10 @@ const currentTab = ref("window1");
   }
 }
 @media (max-width: 1280px) {
-  .v-card-text {
+  .layout-wrapper > .v-card-text {
     background: none;
   }
-  .v-card--variant-elevated {
+  .match-height > .v-col-sm-12 > .v-card--variant-elevated {
     background: none;
     box-shadow: none;
   }
