@@ -200,13 +200,13 @@ const matchPasswordRule = (v) =>
                     >
                       <VCheckbox v-model="rememberMe" label="아이디 저장" />
 
-                      <div
-                        @click="isDialogVisible = true"
+                      <VBtn
                         variant="text"
-                        class="text-primary ms-2 mb-1"
+                        class="text-primary ms-2 mb-1 px-0 min-h-0 resetpass"
+                        @click="isDialogVisible = true"
                       >
                         비밀번호 재설정
-                      </div>
+                      </VBtn>
 
                       <!-- Dialog -->
                       <VDialog v-model="isDialogVisible" class="v-dialog-sm">
@@ -344,6 +344,10 @@ const matchPasswordRule = (v) =>
   .background-image {
     background-color: #fff;
   }
+  .resetpass {
+    flex: none;
+    width: auto;
+  }
 }
 @media (min-width: 1281px) {
   .position-relative {
@@ -389,6 +393,17 @@ const matchPasswordRule = (v) =>
   transform: translateX(-50%);
   img {
     height: 24px;
+  }
+}
+.resetpass {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  min-height: auto !important;
+  padding: 0 !important;
+  font-weight: normal !important;
+  :deep(.v-btn__overlay),
+  :deep(.v-ripple__container) {
+    display: none !important;
   }
 }
 </style>
